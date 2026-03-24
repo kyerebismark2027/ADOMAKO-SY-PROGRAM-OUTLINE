@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADOMAKO PROGRAM OUTLINE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-blue: #1a365d;
+            --secondary-blue: #2c5282;
+            --accent-blue: #4299e1;
+            --black: #1a202c;
+            --white: #ffffff;
+            --gray-light: #f7fafc;
+            --gray: #e2e8f0;
+            --gray-dark: #718096;
+            --success: #38a169;
+            --error: #e53e3e;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            min-height: 100vh;
+            color: var(--black);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Login Page */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        .login-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid var(--primary-blue);
+        }
+
+        .login-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .login-subtitle {
+            font-size: 14px;
+            color: var(--gray-dark);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--gray);
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.1);
+        }
+
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: var(--white);
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(26, 54, 93, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--gray);
+            color: var(--black);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-dark);
+            color: var(--white);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: var(--white);
+        }
+
+        .btn-success:hover {
+            background: #2f855a;
+            transform: translateY(-2px);
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: var(--white);
+        }
+
+        .btn-whatsapp:hover {
+            background: #1fb855;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .error-message {
+            background: #fed7d7;
+            color: var(--error);
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        /* Dashboard */
+        .dashboard {
+            min-height: 100vh;
+            background: var(--gray-light);
+        }
+
+        .header {
+            background: var(--primary-blue);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--white);
+        }
+
+        .header-title {
+            color: var(--white);
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .header-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 12px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-icon {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-logout {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+        }
+
+        .btn-logout:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-help {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+        }
+
+        .btn-help:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: var(--gray-dark);
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .day-card {
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .day-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .day-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: var(--white);
+            padding: 15px 20px;
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .day-icon {
+            font-size: 24px;
+        }
+
+        .day-content {
+            padding: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gray-dark);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid var(--gray);
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: var(--gray-light);
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.1);
+        }
+
+        .input-group textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        /* Summary Page */
+        .summary-container {
+            background: var(--white);
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        .summary-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--primary-blue);
+        }
+
+        .summary-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 5px solid var(--primary-blue);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .summary-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .summary-subtitle {
+            font-size: 18px;
+            color: var(--gray-dark);
+            font-weight: 500;
+        }
+
+        .summary-date {
+            font-size: 14px;
+            color: var(--gray-dark);
+            margin-top: 15px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 30px auto;
+            max-width: 1400px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            width: 95%;
+        }
+
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            min-width: 900px;
+        }
+
+        .summary-table thead {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+        }
+
+        .summary-table th {
+            color: var(--white);
+            padding: 18px 15px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: left;
+            border-bottom: 3px solid var(--accent-blue);
+        }
+
+        .summary-table tbody tr {
+            transition: all 0.3s ease;
+        }
+
+        .summary-table tbody tr:nth-child(even) {
+            background: var(--gray-light);
+        }
+
+        .summary-table tbody tr:hover {
+            background: rgba(66, 153, 225, 0.1);
+        }
+
+        .summary-table td {
+            padding: 16px 15px;
+            font-size: 14px;
+            border-bottom: 1px solid var(--gray);
+            vertical-align: top;
+            font-weight: 600;
+        }
+
+        .summary-table .day-cell {
+            font-weight: 700;
+            color: var(--primary-blue);
+            font-size: 15px;
+        }
+
+        .summary-footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: var(--gray-light);
+            border-radius: 16px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .summary-footer p {
+            color: var(--gray-dark);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .download-only {
+            display: block;
+        }
+
+        .download-only.hidden {
+            display: none !important;
+        }
+
+        .summary-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Help Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--white);
+            border-radius: 20px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.show .modal {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: var(--white);
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+        }
+
+        .modal-header h2 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .help-section {
+            margin-bottom: 25px;
+        }
+
+        .help-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .help-section h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .help-section p {
+            color: var(--gray-dark);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .help-section ol {
+            color: var(--gray-dark);
+            line-height: 1.8;
+            padding-left: 25px;
+            font-size: 15px;
+        }
+
+        .help-section li {
+            margin-bottom: 8px;
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, rgba(66, 153, 225, 0.1), rgba(66, 153, 225, 0.05));
+            border-left: 4px solid var(--accent-blue);
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .tip-box strong {
+            color: var(--primary-blue);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .header-left {
+                text-align: center;
+            }
+
+            .header-title {
+                font-size: 16px;
+            }
+
+            .header-subtitle {
+                font-size: 11px;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .btn-icon {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            .days-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-title {
+                font-size: 24px;
+            }
+
+            .summary-subtitle {
+                font-size: 14px;
+            }
+
+            .summary-logo {
+                width: 80px;
+                height: 80px;
+            }
+
+            .summary-table th,
+            .summary-table td {
+                padding: 12px 8px;
+                font-size: 11px;
+                word-break: break-word;
+            }
+
+            .summary-table th {
+                font-size: 10px;
+                white-space: nowrap;
+            }
+
+            .table-container {
+                width: 98%;
+                margin: 20px auto;
+            }
+
+            .action-buttons,
+            .summary-actions {
+                flex-direction: column;
+                padding: 0 10px;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .login-card {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal-header h2 {
+                font-size: 18px;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+
+            .summary-table th,
+            .summary-table td {
+                padding: 10px 8px;
+                font-size: 11px;
+            }
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--success);
+            color: var(--white);
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .toast {
+                left: 20px;
+                right: 20px;
+                bottom: 20px;
+                text-align: center;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .header, .action-buttons, .btn {
+                display: none !important;
+            }
+
+            .summary-container {
+                padding: 0;
+            }
+
+            .table-container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="login-container">
+        <div class="login-card">
+            <img src="pent.jpg.png" alt="Church Logo" class="login-logo" onerror="this.style.display='none'">
+            <h1 class="login-title">ADOMAKO PROGRAM OUTLINE</h1>
+            <p class="login-subtitle">Church of Pentecost – Adomako Assembly</p>
+            <div id="errorMessage" class="error-message">Invalid username or password. Please try again.</div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    Login
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="dashboard hidden">
+        <header class="header">
+            <div class="header-left">
+                <img src="pent.jpg.png" alt="Church Logo" class="header-logo" onerror="this.style.display='none'">
+                <div>
+                    <div class="header-title">ADOMAKO PROGRAM OUTLINE</div>
+                    <div class="header-subtitle">Church of Pentecost – Adomako Assembly</div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn-icon btn-help" onclick="showHelp()">
+                    ?
+                </button>
+                <button class="btn-icon btn-logout" onclick="logout()">
+                    Logout
+                </button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <h1 class="page-title">Program Input</h1>
+            <p class="page-subtitle">Enter the weekly church program details below</p>
+
+            <div class="days-grid" id="daysGrid">
+                <!-- Cards will be generated by JavaScript -->
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-success" onclick="generateSummary()">
+                    Generate Summary
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Summary Page -->
+    <div id="summaryPage" class="summary-container hidden">
+        <div id="summaryContent">
+            <div class="summary-header">
+                <img src="pent.jpg.png" alt="Church Logo" class="summary-logo" onerror="this.style.display='none'">
+                <h1 class="summary-title">ADOMAKO PROGRAM OUTLINE</h1>
+                <p class="summary-subtitle">Church of Pentecost – Adomako Assembly</p>
+                <p class="summary-date" id="summaryDate"></p>
+            </div>
+
+            <div class="table-container" id="tableContainer">
+                <table class="summary-table">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Opening Prayer</th>
+                            <th>Worship</th>
+                            <th>Sermon</th>
+                            <th>Intensive Prayer</th>
+                            <th>Offering</th>
+                            <th>Conductor</th>
+                        </tr>
+                    </thead>
+                    <tbody id="summaryTableBody">
+                        <!-- Data will be generated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="summary-footer download-only">
+                <p>Church of Pentecost – Adomako Assembly<br>Program Outline for the Week</p>
+                <div class="summary-actions">
+                    <button class="btn btn-whatsapp" onclick="shareToWhatsAppImage()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        Share Image on WhatsApp
+                    </button>
+                    <button class="btn btn-primary" onclick="downloadSummary()">
+                        Download as Image
+                    </button>
+                    <button class="btn btn-secondary" onclick="goToDashboard()">
+                        Back to Input
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden container for full capture -->
+    <div id="downloadContainer" style="position: fixed; left: 0; top: 0; width: 100%; background: white; padding: 40px; z-index: 9999; visibility: hidden; display: none;"></div>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal-overlay" onclick="closeHelp(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2>Help & Guide</h2>
+                <button class="modal-close" onclick="hideHelp()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="help-section">
+                    <h3>🔐 How to Login</h3>
+                    <ol>
+                        <li>Enter the username: <strong>adomako</strong></li>
+                        <li>Enter the password: <strong>cop2028</strong></li>
+                        <li>Click the "Login" button</li>
+                        <li>If credentials are correct, you'll be redirected to the dashboard</li>
+                    </ol>
+                </div>
+
+                <div class="help-section">
+                    <h3>📝 How to Enter Program Data</h3>
+                    <ol>
+                        <li>Navigate to the Input page (Dashboard)</li>
+                        <li>Find the day you want to program (Monday through Sunday)</li>
+                        <li>Fill in the following fields for each day:
+                            <ul>
+                                <li>Opening Prayer</li>
+                                <li>Worship</li>
+                                <li>Sermon</li>
+                                <li>Intensive Prayer</li>
+                                <li>Offering</li>
+                                <li>Conductor</li>
+                            </ul>
+                        </li>
+                        <li>Data is automatically saved to your browser</li>
+                    </ol>
+                </div>
+
+                <div class="help-section">
+                    <h3>📊 How to Generate Summary</h3>
+                    <ol>
+                        <li>Enter all your program data</li>
+                        <li>Click the "Generate Summary" button</li>
+                        <li>View your complete program in a professional table format</li>
+                    </ol>
+                </div>
+
+                <div class="help-section">
+                    <h3>📥 How to Download as Image</h3>
+                    <ol>
+                        <li>Generate the summary view</li>
+                        <li>Click the "Download as Image" button</li>
+                        <li>Wait for the download to complete</li>
+                        <li>The summary will be saved as a PNG image</li>
+                    </ol>
+                </div>
+
+                <div class="help-section">
+                    <h3>📱 How to Share on WhatsApp</h3>
+                    <ol>
+                        <li>Generate the summary view</li>
+                        <li>Click the "Share on WhatsApp" button</li>
+                        <li>WhatsApp will open with your program as a formatted message</li>
+                        <li>Select a contact or group to share with</li>
+                    </ol>
+                </div>
+
+                <div class="tip-box">
+                    <strong>💡 Tip:</strong> Your data is automatically saved in your browser's local storage. This means your program data will persist even after you close the browser or refresh the page!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        const DAYS = [
+            { id: 'monday', name: 'Monday', icon: '🌙' },
+            { id: 'tuesday', name: 'Tuesday', icon: '🔥' },
+            { id: 'wednesday', name: 'Wednesday', icon: '✝️' },
+            { id: 'thursday', name: 'Thursday', icon: '📖' },
+            { id: 'friday', name: 'Friday', icon: '🕯️' },
+            { id: 'sunday', name: 'Sunday', icon: '☀️' }
+        ];
+
+        const FIELDS = [
+            { id: 'openingPrayer', name: 'Opening Prayer' },
+            { id: 'worship', name: 'Worship' },
+            { id: 'sermon', name: 'Sermon' },
+            { id: 'intensivePrayer', name: 'Intensive Prayer' },
+            { id: 'offering', name: 'Offering' },
+            { id: 'conductor', name: 'Conductor' }
+        ];
+
+        const USERNAME = 'adomako';
+        const PASSWORD = 'cop2028';
+
+        let programData = {};
+
+        function init() {
+            loadSavedData();
+            if (sessionStorage.getItem('isLoggedIn')) {
+                showDashboard();
+            } else {
+                showLogin();
+            }
+        }
+
+        function loadSavedData() {
+            const saved = localStorage.getItem('adomakoProgram');
+            if (saved) {
+                programData = JSON.parse(saved);
+            } else {
+                programData = {};
+                DAYS.forEach(day => {
+                    programData[day.id] = {};
+                    FIELDS.forEach(field => {
+                        programData[day.id][field.id] = '';
+                    });
+                });
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('adomakoProgram', JSON.stringify(programData));
+            showToast('Data saved successfully!');
+        }
+
+        function showLogin() {
+            document.getElementById('loginPage').classList.remove('hidden');
+            document.getElementById('dashboard').classList.add('hidden');
+            document.getElementById('summaryPage').classList.add('hidden');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('errorMessage').classList.remove('show');
+        }
+
+        function showDashboard() {
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+            document.getElementById('summaryPage').classList.add('hidden');
+            renderDayCards();
+        }
+
+        function showSummary() {
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('dashboard').classList.add('hidden');
+            document.getElementById('summaryPage').classList.remove('hidden');
+            renderSummaryTable();
+        }
+
+        function renderDayCards() {
+            const grid = document.getElementById('daysGrid');
+            grid.innerHTML = '';
+
+            DAYS.forEach(day => {
+                const card = document.createElement('div');
+                card.className = 'day-card';
+                card.innerHTML = `
+                    <div class="day-header">
+                        <span class="day-icon">${day.icon}</span>
+                        ${day.name}
+                    </div>
+                    <div class="day-content">
+                        ${FIELDS.map(field => `
+                            <div class="input-group">
+                                <label for="${day.id}_${field.id}">${field.name}</label>
+                                <input type="text" 
+                                    id="${day.id}_${field.id}" 
+                                    placeholder="Enter ${field.name.toLowerCase()}"
+                                    value="${programData[day.id]?.[field.id] || ''}"
+                                    onchange="updateData('${day.id}', '${field.id}', this.value)">
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function updateData(dayId, fieldId, value) {
+            if (!programData[dayId]) {
+                programData[dayId] = {};
+            }
+            programData[dayId][fieldId] = value;
+            saveData();
+        }
+
+        function renderSummaryTable() {
+            const tbody = document.getElementById('summaryTableBody');
+            const dateEl = document.getElementById('summaryDate');
+            const now = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            dateEl.textContent = `Generated on: ${now.toLocaleDateString('en-US', options)}`;
+
+            tbody.innerHTML = DAYS.map(day => `
+                <tr>
+                    <td class="day-cell">${day.icon} ${day.name}</td>
+                    ${FIELDS.map(field => `
+                        <td>${programData[day.id]?.[field.id] || '-'}</td>
+                    `).join('')}
+                </tr>
+            `).join('');
+        }
+
+        function generateSummary() {
+            saveData();
+            showSummary();
+            showToast('Summary generated!');
+        }
+
+        function goToDashboard() {
+            showDashboard();
+        }
+
+        function downloadSummary() {
+            showToast('Preparing download...');
+            
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            
+            const tableHTML = `
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <img src="pent.jpg.png" style="width: 100px; height: 100px; border-radius: 50%; border: 4px solid #1a365d; margin-bottom: 15px;" onerror="this.style.display='none'">
+                    <h1 style="font-size: 28px; font-weight: 800; color: #1a365d; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">ADOMAKO PROGRAM OUTLINE</h1>
+                    <p style="font-size: 14px; color: #718096; margin-bottom: 5px;">Church of Pentecost – Adomako Assembly</p>
+                    <p style="font-size: 12px; color: #718096;">Generated on: ${dateStr}</p>
+                </div>
+                <table style="width: 100%; border-collapse: collapse; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 12px; table-layout: fixed;">
+                    <thead>
+                        <tr style="background: linear-gradient(135deg, #1a365d, #2c5282); color: white;">
+                            <th style="padding: 12px 8px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #4299e1; width: 8%;">Day</th>
+                            <th style="padding: 12px 8px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #4299e1; width: 15%;">Opening Prayer</th>
+                            <th style="padding: 12px 8px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #4299e1; width: 15%;">Worship</th>
+                            <th style="padding: 12px 8px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #4299e1; width: 15%;">Sermon</th>
+                            <th style="padding: 12px 8px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #4299e1; width: 17%;">Intensive Prayer</th>
+                            <th style="padding: 12px 8px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #4299e1; width: 12%;">Offering</th>
+                            <th style="padding: 12px 8px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #4299e1; width: 18%;">Conductor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${DAYS.map((day, index) => `
+                            <tr style="background: ${index % 2 === 0 ? '#ffffff' : '#f7fafc'};">
+                                <td style="padding: 10px 8px; font-weight: 700; color: #1a365d; border-bottom: 1px solid #e2e8f0; font-size: 11px;">${day.icon} ${day.name}</td>
+                                <td style="padding: 10px 8px; font-weight: 600; border-bottom: 1px solid #e2e8f0; font-size: 11px; word-wrap: break-word;">${programData[day.id]?.openingPrayer || '-'}</td>
+                                <td style="padding: 10px 8px; font-weight: 600; border-bottom: 1px solid #e2e8f0; font-size: 11px; word-wrap: break-word;">${programData[day.id]?.worship || '-'}</td>
+                                <td style="padding: 10px 8px; font-weight: 600; border-bottom: 1px solid #e2e8f0; font-size: 11px; word-wrap: break-word;">${programData[day.id]?.sermon || '-'}</td>
+                                <td style="padding: 10px 8px; font-weight: 600; border-bottom: 1px solid #e2e8f0; font-size: 11px; word-wrap: break-word;">${programData[day.id]?.intensivePrayer || '-'}</td>
+                                <td style="padding: 10px 8px; font-weight: 600; border-bottom: 1px solid #e2e8f0; font-size: 11px; word-wrap: break-word;">${programData[day.id]?.offering || '-'}</td>
+                                <td style="padding: 10px 8px; font-weight: 600; border-bottom: 1px solid #e2e8f0; font-size: 11px; word-wrap: break-word;">${programData[day.id]?.conductor || '-'}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 2px solid #1a365d;">
+                    <p style="color: #718096; font-size: 12px;">Church of Pentecost – Adomako Assembly<br>Program Outline for the Week</p>
+                </div>
+            `;
+            
+            const downloadContainer = document.getElementById('downloadContainer');
+            downloadContainer.innerHTML = tableHTML;
+            
+            downloadContainer.style.width = '1200px';
+            downloadContainer.style.maxWidth = '95%';
+            downloadContainer.style.position = 'absolute';
+            downloadContainer.style.left = '0';
+            downloadContainer.style.top = '0';
+            downloadContainer.style.zIndex = '99999';
+            downloadContainer.style.background = '#ffffff';
+            downloadContainer.style.padding = '40px';
+            downloadContainer.style.display = 'block';
+            downloadContainer.style.visibility = 'visible';
+            downloadContainer.style.overflow = 'visible';
+            downloadContainer.style.height = 'auto';
+            
+            const originalOverflow = document.body.style.overflow;
+            const originalPosition = document.body.style.position;
+            document.body.style.overflow = 'visible';
+            document.body.style.position = 'relative';
+            
+            setTimeout(() => {
+                html2canvas(downloadContainer, {
+                    backgroundColor: '#ffffff',
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    allowTaint: true,
+                    scrollIntoView: false,
+                    useCORS: true
+                }).then(canvas => {
+                    downloadContainer.style.display = 'none';
+                    document.body.style.overflow = originalOverflow;
+                    document.body.style.position = originalPosition;
+                    
+                    const link = document.createElement('a');
+                    link.download = `ADOMAKO_PROGRAM_OUTLINE_${new Date().toISOString().split('T')[0]}.png`;
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                    showToast('Download complete!');
+                }).catch(err => {
+                    downloadContainer.style.display = 'none';
+                    document.body.style.overflow = originalOverflow;
+                    document.body.style.position = originalPosition;
+                    showToast('Download failed. Please try again.');
+                    console.error(err);
+                });
+            }, 1500);
+        }
+
+        function shareToWhatsAppImage() {
+            showToast('Preparing image...');
+            
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            
+            const tableHTML = `
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <img src="pent.jpg.png" style="width: 100px; height: 100px; border-radius: 50%; border: 4px solid #1a365d; margin-bottom: 15px;" onerror="this.style.display='none'">
+                    <h1 style="font-size: 28px; font-weight: 800; color: #1a365d; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">ADOMAKO PROGRAM OUTLINE</h1>
+                    <p style="font-size: 14px; color: #718096; margin-bottom: 5px;">Church of Pentecost – Adomako Assembly</p>
+                    <p style="font-size: 12px; color: #718096;">Generated on: ${dateStr}</p>
+                </div>
+                <table style="width: 100%; border-collapse: collapse; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 12px; table-layout: fixed;">
+                    <thead>
+                        <tr style="background: linear-gradient(135deg, #1a365d, #2c5282); color: white;">
+                            <th style="padding: 12px 8px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #4299e1; width: 8%;">Day</th>
+                            <th style="padding: 12px 8px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #4299e1; width: 15%;">Opening Prayer</th>
+                            <th style="padding: 12px 8px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #4299e1; width: 15%;">Worship</th>
+                            <th style="padding: 12px 8px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #4299e1; width: 15%;">Sermon</th>
+                            <th style="padding: 12px 8px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #4299e1; width: 17%;">Intensive Prayer</th>
+                            <th style="padding: 12px 8px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #4299e1; width: 12%;">Offering</th>
+                            <th style="padding: 12px 8px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #4299e1; width: 18%;">Conductor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${DAYS.map((day, index) => `
+                            <tr style="background: ${index % 2 === 0 ? '#ffffff' : '#f7fafc'};">
+                                <td style="padding: 10px 8px; font-weight: 700; color: #1a365d; border-bottom: 1px solid #e2e8f0; font-size: 11px;">${day.icon} ${day.name}</td>
+                                <td style="padding: 10px 8px; font-weight: 600; border-bottom: 1px solid #e2e8f0; font-size: 11px; word-wrap: break-word;">${programData[day.id]?.openingPrayer || '-'}</td>
+                                <td style="padding: 10px 8px; font-weight: 600; border-bottom: 1px solid #e2e8f0; font-size: 11px; word-wrap: break-word;">${programData[day.id]?.worship || '-'}</td>
+                                <td style="padding: 10px 8px; font-weight: 600; border-bottom: 1px solid #e2e8f0; font-size: 11px; word-wrap: break-word;">${programData[day.id]?.sermon || '-'}</td>
+                                <td style="padding: 10px 8px; font-weight: 600; border-bottom: 1px solid #e2e8f0; font-size: 11px; word-wrap: break-word;">${programData[day.id]?.intensivePrayer || '-'}</td>
+                                <td style="padding: 10px 8px; font-weight: 600; border-bottom: 1px solid #e2e8f0; font-size: 11px; word-wrap: break-word;">${programData[day.id]?.offering || '-'}</td>
+                                <td style="padding: 10px 8px; font-weight: 600; border-bottom: 1px solid #e2e8f0; font-size: 11px; word-wrap: break-word;">${programData[day.id]?.conductor || '-'}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 2px solid #1a365d;">
+                    <p style="color: #718096; font-size: 12px;">Church of Pentecost – Adomako Assembly<br>Program Outline for the Week</p>
+                </div>
+            `;
+            
+            const downloadContainer = document.getElementById('downloadContainer');
+            downloadContainer.innerHTML = tableHTML;
+            
+            downloadContainer.style.width = '1200px';
+            downloadContainer.style.maxWidth = '95%';
+            downloadContainer.style.position = 'absolute';
+            downloadContainer.style.left = '0';
+            downloadContainer.style.top = '0';
+            downloadContainer.style.zIndex = '99999';
+            downloadContainer.style.background = '#ffffff';
+            downloadContainer.style.padding = '40px';
+            downloadContainer.style.display = 'block';
+            downloadContainer.style.visibility = 'visible';
+            downloadContainer.style.overflow = 'visible';
+            downloadContainer.style.height = 'auto';
+            
+            const originalOverflow = document.body.style.overflow;
+            const originalPosition = document.body.style.position;
+            document.body.style.overflow = 'visible';
+            document.body.style.position = 'relative';
+            
+            setTimeout(() => {
+                html2canvas(downloadContainer, {
+                    backgroundColor: '#ffffff',
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    allowTaint: true,
+                    scrollIntoView: false,
+                    useCORS: true
+                }).then(canvas => {
+                    downloadContainer.style.display = 'none';
+                    document.body.style.overflow = originalOverflow;
+                    document.body.style.position = originalPosition;
+                    
+                    canvas.toBlob(function(blob) {
+                        const url = URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.download = 'ADOMAKO_PROGRAM_OUTLINE.png';
+                        link.click();
+                        
+                        setTimeout(() => URL.revokeObjectURL(url), 100);
+                        showToast('Image downloaded! Now share to WhatsApp.');
+                    }, 'image/png');
+                }).catch(err => {
+                    downloadContainer.style.display = 'none';
+                    document.body.style.overflow = originalOverflow;
+                    document.body.style.position = originalPosition;
+                    showToast('Failed to prepare image. Please try again.');
+                    console.error(err);
+                });
+            }, 1500);
+        }
+
+        function shareToWhatsApp() {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            
+            let message = `*CHURCH OF PENTECOST - ADOMAKO ASSEMBLY*\n`;
+            message += `*ADOMAKO PROGRAM OUTLINE*\n`;
+            message += `📅 ${dateStr}\n\n`;
+            
+            DAYS.forEach(day => {
+                message += `*${day.icon} ${day.name.toUpperCase()}*\n`;
+                FIELDS.forEach(field => {
+                    const value = programData[day.id]?.[field.id] || '-';
+                    message += `${field.name}: ${value}\n`;
+                });
+                message += `\n`;
+            });
+            
+            message += `_\nChurch of Pentecost – Adomako Assembly_`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
+            showToast('Opening WhatsApp...');
+        }
+
+        function showHelp() {
+            document.getElementById('helpModal').classList.add('show');
+        }
+
+        function hideHelp() {
+            document.getElementById('helpModal').classList.remove('show');
+        }
+
+        function closeHelp(event) {
+            if (event.target.id === 'helpModal') {
+                hideHelp();
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function logout() {
+            sessionStorage.removeItem('isLoggedIn');
+            showLogin();
+            showToast('Logged out successfully');
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (username === USERNAME && password === PASSWORD) {
+                sessionStorage.setItem('isLoggedIn', 'true');
+                showDashboard();
+                showToast('Welcome to ADOMAKO PROGRAM OUTLINE!');
+            } else {
+                document.getElementById('errorMessage').classList.add('show');
+                setTimeout(() => {
+                    document.getElementById('errorMessage').classList.remove('show');
+                }, 3000);
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideHelp();
+            }
+        });
+
+        init();
+    </script>
+</body>
+</html>
